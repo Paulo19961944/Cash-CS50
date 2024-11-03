@@ -3,9 +3,9 @@ Esse é um programa que pega as moedas e faz o calculos de quantas moedas foram 
 
 # MODO DE USAR
 1. Abra o CMD
-2. Digite o comando ```bash git clone "https://github.com/Paulo19961944/Cash-CS50/"```
-3. Digite o comando ```bash gcc -std=c99 cash.c main.c -o cash```
-4. Execute o programa com ```bash cash```
+2. Digite o comando ```git clone "https://github.com/Paulo19961944/Cash-CS50/"```
+3. Digite o comando ```gcc -std=c99 cash.c main.c -o cash```
+4. Execute o programa com ```cash```
 <br></br>
 
 # CONCLUSÃO
