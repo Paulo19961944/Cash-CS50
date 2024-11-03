@@ -10,7 +10,9 @@ float get_float(const char *message) {
 
     while (1) {
         printf("%s", message);
-        fgets(buffer, sizeof(buffer), stdin);
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
+            continue; // Continue em caso de falha na leitura
+        }
         char *endptr;
         number = strtof(buffer, &endptr);
 
@@ -25,34 +27,23 @@ float get_float(const char *message) {
 }
 
 int ATM_System() {
-    int pennies = 0;
+    int coins[] = {25, 10, 5, 1}; // Valores das moedas
+    int sizeCoins = sizeof(coins) / sizeof(coins[0]);
     int pennyValue = 0;
     int transactions = 0;
     float userNum = get_float("Digite um numero: ");
     int cents = (int)roundf(fmodf(userNum * 100, 100));
-    
-    while (cents > 0) {
-        if (cents >= 25) {
-            cents -= 25;
-            pennyValue += 25;
-            transactions += 1;
-        } else if (cents >= 10) {
-            cents -= 10;
-            pennyValue += 10;
-            transactions += 1;
-        } else if (cents >= 5) {
-            cents -= 5;
-            pennyValue += 5;
-            transactions += 1;
-        } else if (cents > 0) {
-            cents -= 1;
-            pennyValue += 1;
-            transactions += 1;
+
+    for (int i = 0; i < sizeCoins; i++) {
+        while (cents >= coins[i]) {
+            cents -= coins[i];
+            pennyValue += coins[i];
+            transactions++;
         }
     }
     
     printf("\nO valor do troco em moedas foi: %d centavos\n", pennyValue);
-    printf("E foram usadas %d moedas.", transactions);
+    printf("E foram usadas %d moedas.\n", transactions);
     
     return pennyValue;
 }
